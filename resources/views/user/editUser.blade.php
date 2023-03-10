@@ -47,13 +47,15 @@
                         <div class="form-group">
                             <label>{{ __('Confirm New Password') }}</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirm New Password') }}" value="" required>
-                        </div>
 
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-fill btn-primary">{{ __('Actualizar') }}</button>
+                            <button type="submit" class="btn btn-fill btn-primary" style="margin-left: 250px">{{ __('Actualizar') }}</button>
+
+                        </div>
                     </div>
                 </form>
+                    <div class="card-footer">
+                        <a href="{{route('viewUsers')}}"><button class="btn btn-fill btn-primary" title="Volver a Usuarios"><i class="tim-icons icon-double-left"></i></button></a>
+                    </div>
             </div>
         </div>
     </div>
