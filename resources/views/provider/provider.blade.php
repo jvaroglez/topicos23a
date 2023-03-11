@@ -13,17 +13,7 @@
                             <h2 class="card-title">Proveedores</h2>
                         </div>
                         <div class="col-sm-5">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-
-                                <label class="btn btn-sm btn-primary btn-simple active">
-                                    <input type="radio" name="options" checked>
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Nuevo Proveedor</span>
-                                    <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-single-02"></i>
-                                </span>
-                                </label>
-
-                            </div>
+                            <a href="{{route('newProvider')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Proveedor</button></a>
                         </div>
                     </div>
                 </div>
@@ -57,8 +47,8 @@
                                     <td>{{$provider->telefono}}</td>
                                     <td>{{$provider->direccion}}</td>
                                     <td class="text-center">
-                                        <a href="#"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('provider.delete', ['id' => $provider->id])}}"><button class="btn btn-round btn-simple btn-warning"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <a href="{{route('provider.editProvider', $provider->id) }}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
+                                        <a href="{{route('provider.delete', ['id' => $provider->id])}}"><button class="btn btn-round btn-simple btn-warning" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -21,67 +21,54 @@ class ProviderController extends Controller
         return view('provider.provider', compact('providers'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function newProvider()
     {
-        //
+        return view('provider.newProvider');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'telefono' => 'required|numeric',
+            'direccion' => 'required|string|max:255',
+        ]);
+
+        $data = $request->all();
+        $provider = new Provider();
+        $provider->name = $data['name'];
+        $provider->email = $data['email'];
+        $provider->telefono = $data['telefono'];
+        $provider->direccion = $data['direccion'];
+        $provider->save();
+        return redirect('provider');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function editProvider($id)
     {
-        //
+        $provider = Provider::findOrFail($id);
+        return view('provider.editProvider', compact('provider'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'telefono' => 'required|numeric',
+            'direccion' => 'required|string|max:255',
+        ]);
+        //Actualizar datos
+        $provider = Provider::findOrFail($id);
+        $provider->name = $request->input('name');
+        $provider->email = $request->input('email');
+        $provider->telefono = $request->input('telefono');
+        $provider->direccion = $request->input('direccion');
+        $provider->save();
+        return redirect('provider');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function delete($id)
     {
         $providers = Provider::findOrFail($id);

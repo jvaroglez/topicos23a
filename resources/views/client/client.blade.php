@@ -13,17 +13,7 @@
                             <h2 class="card-title">Clientes</h2>
                         </div>
                         <div class="col-sm-5">
-                            <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
-
-                                <label class="btn btn-sm btn-primary btn-simple active">
-                                    <input type="radio" name="options" checked>
-                                    <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Nuevo Cliente</span>
-                                    <span class="d-block d-sm-none">
-                                    <i class="tim-icons icon-single-02"></i>
-                                </span>
-                                </label>
-
-                            </div>
+                            <a href="{{route('newClient')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Cliente</button></a>
                         </div>
                     </div>
                 </div>
@@ -50,15 +40,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach( $clientes as $cliente)
+                            @foreach( $clients as $client)
                                 <tr>
-                                    <td>{{$cliente->name}}</td>
-                                    <td>{{$cliente->email}}</td>
-                                    <td>{{$cliente->telefono}}</td>
-                                    <td>{{$cliente->direccion}}</td>
+                                    <td>{{$client->name}}</td>
+                                    <td>{{$client->email}}</td>
+                                    <td>{{$client->telefono}}</td>
+                                    <td>{{$client->direccion}}</td>
                                     <td class="text-center">
-                                        <a href="#"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('client.delete', ['id' => $cliente->id])}}"><button class="btn btn-round btn-simple btn-warning"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <a href="{{route('client.editClient', $client->id)}}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
+                                        <a href="{{route('client.delete', ['id' => $client->id])}}"><button class="btn btn-round btn-simple btn-warning"><i class="tim-icons icon-trash-simple"></i></button></a>
                                     </td>
                                 </tr>
                             @endforeach
