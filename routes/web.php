@@ -28,8 +28,12 @@ Route::get('/provider/delete/{id}', [ProviderController::class, 'delete'])->name
 Route::get('/client', [ClientController::class, 'index']);
 Route::get('/client/delete/{id}', [ClientController::class, 'delete'])->name('client.delete');
 
-Route::get('/product', [ProductController::class, 'index']);
+Route::get('/product', [ProductController::class, 'index'])->name('viewProducts');
+Route::get('/newProduct', [ProductController::class, 'newProduct'])->name('newProduct');
+Route::get('/product/{id}/editProduct', [ProductController::class, 'editProduct'])->name('product.editProduct');
+Route::put('/product/{id}', [ProductController::class, 'update'])-> name('product.update');
 Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
+Route::post('/product/save', [ProductController::class, 'save'])-> name('product.save');
 
 Route::get('/home', 'App\Http\Controllers\HomeController@index')->name('home')->middleware('auth');
 

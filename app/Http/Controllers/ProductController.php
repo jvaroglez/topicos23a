@@ -10,78 +10,60 @@ class ProductController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $products = Product::all();
         return view('product.product', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function newProduct()
     {
-        //
+        return view('product.newProduct');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function save(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'stock' => 'required|int',
+            'precio' => 'required|numeric',
+        ]);
+
+        $data = $request->all();
+        $product = new Product();
+        $product->name = $data['name'];
+        $product->description = $data['description'];
+        $product->stock = $data['stock'];
+        $product->precio = $data['precio'];
+        $product->save();
+        return redirect('product');
+    }
+    public function editProduct($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.editProduct', compact('product'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:255',
+            'stock' => 'required|int',
+            'precio' => 'required|numeric',
+        ]);
+        //Actualizar datos
+        $product = Product::findOrFail($id);
+        $product->name = $request->input('name');
+        $product->description = $request->input('description');
+        $product->stock = $request->input('stock');
+        $product->precio = $request->input('precio');
+        $product->save();
+        return redirect('product');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function delete($id)
     {
         $products = Product::findOrFail($id);
