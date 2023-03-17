@@ -13,7 +13,7 @@
                             <h2 class="card-title">Usuarios</h2>
                         </div>
                         <div class="col-sm-5">
-                            <a href="{{route('newUser')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Usuario</button></a>
+                            <button type="submit" class="btn btn-fill btn-primary" onclick="event.preventDefault(); newUser('{{route('newUser')}}');">Nuevo Usuario</button>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
                                     <td>{{$usuario->name}}</td>
                                     <td>{{$usuario->email}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('user.editUser', $usuario->id) }}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('user.delete', ['id' => $usuario->id])}}"><button class="btn btn-round btn-simple btn-warning" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('user.editUser', $usuario->id)}}');" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
+                                        <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('user.delete', $usuario->id)}}');" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -60,5 +60,53 @@
         $(document).ready(function() {
             demo.initDashboardPageCharts();
         });
+
+        function newUser(url) {
+            Swal.fire({
+                title: '¿Quieres registrar un nuevo usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonUpdate(url) {
+            Swal.fire({
+                title: '¿Quieres editar este usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDelete(url) {
+            Swal.fire({
+                title: '¿Quieres eliminar este usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
     </script>
 @endpush

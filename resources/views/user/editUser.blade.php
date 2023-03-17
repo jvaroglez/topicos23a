@@ -32,6 +32,19 @@
                             <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{$usuario->email}}" placeholder="{{ __('Email') }}">
                             @include('alerts.feedback', ['field' => 'email'])
                         </div>
+                            <button type="submit" class="btn btn-fill btn-primary" style="margin-left: 250px">{{ __('Actualizar') }}</button>
+                    </div>
+                </form>
+
+                <div class="col-sm-6 text-left">
+                    <h3 class="title">{{ __('Editar Password') }}</h3>
+                </div>
+                <form method="post" action="{{ route('profile.password') }}" autocomplete="off">
+                    <div class="card-body">
+                        @csrf
+                        @method('put')
+
+                        @include('alerts.success', ['key' => 'password_status'])
 
                         <div class="form-group{{ $errors->has('old_password') ? ' has-danger' : '' }}">
                             <label>{{ __('Current Password') }}</label>
@@ -47,10 +60,8 @@
                         <div class="form-group">
                             <label>{{ __('Confirm New Password') }}</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="{{ __('Confirm New Password') }}" value="" required>
-
-                            <button type="submit" class="btn btn-fill btn-primary" style="margin-left: 250px">{{ __('Actualizar') }}</button>
-
                         </div>
+                        <button type="submit" class="btn btn-fill btn-primary" style="margin-left: 250px">{{ __('Actualizar password') }}</button>
                     </div>
                 </form>
                     <div class="card-footer">

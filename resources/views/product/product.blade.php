@@ -13,7 +13,7 @@
                             <h2 class="card-title">Productos</h2>
                         </div>
                         <div class="col-sm-5">
-                            <a href="{{route('newProduct')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Producto</button></a>
+                            <button type="submit" class="btn btn-fill btn-primary" onclick="event.preventDefault(); newProduct('{{route('newProduct')}}');">Nuevo Producto</button>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                                     <td>{{$product->stock}}</td>
                                     <td>$ {{$product->precio}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('product.editProduct', $product->id) }}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('product.delete', ['id' => $product->id])}}"><button class="btn btn-round btn-simple btn-warning" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('product.editProduct', $product->id) }}');" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
+                                        <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('product.delete', ['id' => $product->id])}}');" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -68,5 +68,53 @@
         $(document).ready(function() {
             demo.initDashboardPageCharts();
         });
+
+        function newProduct(url) {
+            Swal.fire({
+                title: '¿Quieres registrar un nuevo producto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonUpdate(url) {
+            Swal.fire({
+                title: '¿Quieres editar este producto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDelete(url) {
+            Swal.fire({
+                title: '¿Quieres eliminar este producto?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
     </script>
 @endpush

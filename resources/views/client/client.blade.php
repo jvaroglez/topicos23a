@@ -13,7 +13,7 @@
                             <h2 class="card-title">Clientes</h2>
                         </div>
                         <div class="col-sm-5">
-                            <a href="{{route('newClient')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Cliente</button></a>
+                            <button type="submit" class="btn btn-fill btn-primary" onclick="event.preventDefault(); newClient('{{route('newClient')}}');">Nuevo Cliente</button>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                                     <td>{{$client->telefono}}</td>
                                     <td>{{$client->direccion}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('client.editClient', $client->id)}}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('client.delete', ['id' => $client->id])}}"><button class="btn btn-round btn-simple btn-warning"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('client.editClient', $client->id)}}');" style="border-color: #0dcaf0; margin-right: 10px;"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
+                                        <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('client.delete', ['id' => $client->id])}}');"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,5 +67,55 @@
         $(document).ready(function() {
             demo.initDashboardPageCharts();
         });
+
+
+
+        function newClient(url) {
+            Swal.fire({
+                title: '¿Quieres registrar un nuevo cliente?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonUpdate(url) {
+            Swal.fire({
+                title: '¿Quieres editar este cliente?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDelete(url) {
+            Swal.fire({
+                title: '¿Quieres eliminar este cliente?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
     </script>
 @endpush

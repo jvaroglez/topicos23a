@@ -13,7 +13,7 @@
                             <h2 class="card-title">Proveedores</h2>
                         </div>
                         <div class="col-sm-5">
-                            <a href="{{route('newProvider')}}"><button type="submit" class="btn btn-fill btn-primary">Nuevo Proveedor</button></a>
+                            <button type="submit" class="btn btn-fill btn-primary" onclick="event.preventDefault(); newProvider('{{route('newProvider')}}');">Nuevo Proveedor</button>
                         </div>
                     </div>
                 </div>
@@ -47,8 +47,8 @@
                                     <td>{{$provider->telefono}}</td>
                                     <td>{{$provider->direccion}}</td>
                                     <td class="text-center">
-                                        <a href="{{route('provider.editProvider', $provider->id) }}"><button class="btn btn-round btn-simple btn-primary" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button></a>
-                                        <a href="{{route('provider.delete', ['id' => $provider->id])}}"><button class="btn btn-round btn-simple btn-warning" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button></a>
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('provider.editProvider', $provider->id) }}');" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
+                                        <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('provider.delete', ['id' => $provider->id])}}');" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -67,5 +67,55 @@
         $(document).ready(function() {
             demo.initDashboardPageCharts();
         });
+
+
+
+        function newProvider(url) {
+            Swal.fire({
+                title: '¿Quieres registrar un nuevo proveedor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonUpdate(url) {
+            Swal.fire({
+                title: '¿Quieres editar este proveedor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDelete(url) {
+            Swal.fire({
+                title: '¿Quieres eliminar este proveedor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
     </script>
 @endpush
