@@ -47,6 +47,7 @@
                                     <td>{{$client->telefono}}</td>
                                     <td>{{$client->direccion}}</td>
                                     <td class="text-center">
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonDetail('{{route('client.detailClient', $client->id)}}');" style="margin-right: 10px;" title="Detalles"><i class="tim-icons icon-alert-circle-exc"></i></button>
                                         <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('client.editClient', $client->id)}}');" style="border-color: #0dcaf0; margin-right: 10px;"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
                                         <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('client.delete', ['id' => $client->id])}}');"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
@@ -68,11 +69,25 @@
             demo.initDashboardPageCharts();
         });
 
-
-
         function newClient(url) {
             Swal.fire({
                 title: '¿Quieres registrar un nuevo cliente?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDetail(url) {
+            Swal.fire({
+                title: '¿Ver detalles del cliente?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

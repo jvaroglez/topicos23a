@@ -39,6 +39,7 @@
                                     <td>{{$usuario->name}}</td>
                                     <td>{{$usuario->email}}</td>
                                     <td class="text-center">
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonDetail('{{route('user.detailUser', $usuario->id)}}');" style="margin-right: 10px;" title="Detalles"><i class="tim-icons icon-alert-circle-exc"></i></button>
                                         <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('user.editUser', $usuario->id)}}');" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
                                         <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('user.delete', $usuario->id)}}');" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
@@ -64,6 +65,22 @@
         function newUser(url) {
             Swal.fire({
                 title: '¿Quieres registrar un nuevo usuario?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDetail(url) {
+            Swal.fire({
+                title: '¿Ver detalles del usuario?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

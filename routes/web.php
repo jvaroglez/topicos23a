@@ -15,6 +15,7 @@ Route::get('/home', function () {
 });
 
 Route::get('/users', [UserController::class, 'index'])->name('viewUsers');
+Route::get('/user/{id}/detail', [UserController::class, 'detail'])->name('user.detailUser');
 Route::get('/newUser', [UserController::class, 'newUser'])->name('newUser');
 Route::post('/user/save', [UserController::class, 'save'])-> name('user.save');
 Route::get('/user/{id}/editUser', [UserController::class, 'editUser'])->name('user.editUser');
@@ -23,6 +24,7 @@ Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('user.d
 
 
 Route::get('/provider', [ProviderController::class, 'index'])->name('viewProviders');
+Route::get('/provider/{id}/detail', [ProviderController::class, 'detail'])->name('provider.detailProvider');
 Route::get('/newProvider', [ProviderController::class, 'newProvider'])->name('newProvider');
 Route::post('/provider/save', [ProviderController::class, 'save'])-> name('provider.save');
 Route::get('/provider/{id}/editProvider', [ProviderController::class, 'editProvider'])->name('provider.editProvider');
@@ -30,6 +32,7 @@ Route::put('/provider/{id}', [ProviderController::class, 'update'])-> name('prov
 Route::get('/provider/delete/{id}', [ProviderController::class, 'delete'])->name('provider.delete');
 
 Route::get('/client', [ClientController::class, 'index'])->name('viewClients');
+Route::get('/client/{id}/detail', [ClientController::class, 'detail'])->name('client.detailClient');
 Route::get('/newClient', [ClientController::class, 'newClient'])->name('newClient');
 Route::post('/client/save', [ClientController::class, 'save'])-> name('client.save');
 Route::get('/client/{id}/editClient', [ClientController::class, 'editClient'])->name('client.editClient');
@@ -37,6 +40,7 @@ Route::put('/client/{id}', [ClientController::class, 'update'])-> name('client.u
 Route::get('/client/delete/{id}', [ClientController::class, 'delete'])->name('client.delete');
 
 Route::get('/product', [ProductController::class, 'index'])->name('viewProducts');
+Route::get('/product/{id}/detail', [ProductController::class, 'detail'])->name('product.detailProduct');
 Route::get('/newProduct', [ProductController::class, 'newProduct'])->name('newProduct');
 Route::get('/product/{id}/editProduct', [ProductController::class, 'editProduct'])->name('product.editProduct');
 Route::put('/product/{id}', [ProductController::class, 'update'])-> name('product.update');

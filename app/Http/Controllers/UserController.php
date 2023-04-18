@@ -23,6 +23,12 @@ class UserController extends Controller
         return view('user.users', compact('usuarios'));
     }
 
+    public function detail($id)
+    {
+        $usuario = User::findOrFail($id);
+        return view('user.detailUser', compact('usuario'));
+    }
+
     public function newUser()
     {
         return view('user.newUser');

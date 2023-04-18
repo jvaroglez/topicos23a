@@ -17,6 +17,12 @@ class ProviderController extends Controller
         return view('provider.provider', compact('providers'));
     }
 
+    public function detail($id)
+    {
+        $provider = Provider::findOrFail($id);
+        return view('provider.detailProvider', compact('provider'));
+    }
+
     public function newProvider()
     {
         return view('provider.newProvider');

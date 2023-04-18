@@ -47,6 +47,7 @@
                                     <td>{{$provider->telefono}}</td>
                                     <td>{{$provider->direccion}}</td>
                                     <td class="text-center">
+                                        <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonDetail('{{route('provider.detailProvider', $provider->id)}}');" style="margin-right: 10px;" title="Detalles"><i class="tim-icons icon-alert-circle-exc"></i></button>
                                         <button class="btn btn-round btn-simple btn-primary" onclick="event.preventDefault(); buttonUpdate('{{route('provider.editProvider', $provider->id) }}');" style="border-color: #0dcaf0; margin-right: 10px;" title="Actualizar"><i style="color: #0dcaf0" class="tim-icons icon-refresh-02"></i></button>
                                         <button class="btn btn-round btn-simple btn-warning" onclick="event.preventDefault(); buttonDelete('{{route('provider.delete', ['id' => $provider->id])}}');" title="Eliminar"><i class="tim-icons icon-trash-simple"></i></button>
                                     </td>
@@ -68,11 +69,25 @@
             demo.initDashboardPageCharts();
         });
 
-
-
         function newProvider(url) {
             Swal.fire({
                 title: '¿Quieres registrar un nuevo proveedor?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url
+                }
+            });
+        }
+
+        function buttonDetail(url) {
+            Swal.fire({
+                title: '¿Ver detalles del proveedor?',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

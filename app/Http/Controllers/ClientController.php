@@ -17,6 +17,12 @@ class ClientController extends Controller
         return view('client.client', compact('clients'));
     }
 
+    public function detail($id)
+    {
+        $client = Client::findOrFail($id);
+        return view('client.detailClient', compact('client'));
+    }
+
     public function newClient()
     {
         return view('client.newClient');

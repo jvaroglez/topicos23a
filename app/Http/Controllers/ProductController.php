@@ -17,6 +17,12 @@ class ProductController extends Controller
         return view('product.product', compact('products'));
     }
 
+    public function detail($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.detailProduct', compact('product'));
+    }
+
     public function newProduct()
     {
         return view('product.newProduct');
