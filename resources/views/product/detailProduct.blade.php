@@ -9,7 +9,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h5 class="card-category">CRUD</h5>
+                            <h5 class="card-category">Detalle de</h5>
                             <h2 class="card-title">Productos</h2>
                         </div>
                     </div>
